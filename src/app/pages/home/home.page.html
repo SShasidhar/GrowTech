@@ -1,0 +1,69 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home" class="grow-tech-title">
+        <span class="premium-gradient">GrowTech</span>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/home" class="active-link">Home</ion-button>
+      <ion-button routerLink="/about">About</ion-button>
+      <ion-button (click)="toggleTheme()" class="theme-toggle">
+        <ion-icon [name]="isDarkMode ? 'sunny-outline' : 'moon-outline'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="animate-up">Modern Applications for <br><span class="premium-gradient">Modern Businesses</span></h1>
+      <p class="hero-subtitle animate-up-delay">
+        In today's digital age, an application is more than just a tool—it's your connection to the world and your
+        primary catalyst for exponential growth.
+        <br><br>
+        <span class="value-tag">Premium digital excellence, engineered for strategic growth at an accessible
+          scale.</span>
+      </p>
+      <div class="hero-actions animate-up-delay-2">
+        <ion-button class="cta-button" routerLink="/about">
+          Discover Our Impact
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Value -->
+  <section class="value-proposition">
+    <div class="container">
+      <div class="glass-card main-value">
+        <div class="value-text">
+          <h2>Why an Application Matters?</h2>
+          <p>Your business deserves to reach its full potential. A custom web or mobile application streamlines customer
+            relationships, automates heavy lifting, and scales your portfolio globally.</p>
+          <ul class="value-list">
+            <li>
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <span>Personal Brand Expansion</span>
+            </li>
+            <li>
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <span>Seamless Customer Relationship</span>
+            </li>
+            <li>
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <span>Scalable Infrastructure</span>
+            </li>
+          </ul>
+        </div>
+        <div class="value-image">
+          <img src="assets/sectors.png" alt="Sectors Collage">
+        </div>
+      </div>
+    </div>
+  </section>
+</ion-content>

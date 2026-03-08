@@ -1,0 +1,91 @@
+<ion-header [translucent]="true" class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button routerLink="/home" class="grow-tech-title">
+                <span class="premium-gradient">GrowTech</span>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button routerLink="/home">Home</ion-button>
+            <ion-button routerLink="/about" class="active-link">About</ion-button>
+            <ion-button (click)="toggleTheme()" class="theme-toggle">
+                <ion-icon [name]="isDarkMode ? 'sunny-outline' : 'moon-outline'"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <div class="about-container">
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <h1 class="premium-gradient">Our Story & Vision</h1>
+            <p class="subtitle">At GrowTech, we dont just build applications; we build gateways to growth. Based on the
+                philosophy of empowering small and medium-sized businesses, we bridge the gap between complex technology
+                and business success.</p>
+        </section>
+
+        <!-- Mission & Values -->
+        <section class="mission-section">
+            <div class="glass-card mission-card">
+                <div class="icon-box">
+                    <ion-icon name="rocket-outline"></ion-icon>
+                </div>
+                <h2>Our Mission</h2>
+                <p>To provide high-quality, scalable, and intuitive digital solutions that help businesses thrive in an
+                    ever-evolving digital landscape.</p>
+            </div>
+
+            <div class="glass-card mission-card">
+                <div class="icon-box">
+                    <ion-icon name="heart-outline"></ion-icon>
+                </div>
+                <h2>Our Values</h2>
+                <p>Innovation, Integrity, and Impact. We measure our success by the growth of our clients and the
+                    strength of their customer relationships.</p>
+            </div>
+
+            <div class="glass-card mission-card">
+                <div class="icon-box">
+                    <ion-icon name="trophy-outline"></ion-icon>
+                </div>
+                <h2>Our Expertise</h2>
+                <p>Specializing in Health, Finance, Real Estate, and more. We bring industry-specific insights to every
+                    line of code we write.</p>
+            </div>
+        </section>
+
+        <!-- Expertise Areas -->
+        <section class="expertise-details">
+            <h2>Transforming Industries</h2>
+            <div class="expertise-grid">
+                <div class="expertise-item">
+                    <span>Health</span>
+                    <p>Streamlining patient records and care management.</p>
+                </div>
+                <div class="expertise-item">
+                    <span>Finance</span>
+                    <p>Secure, robust, and transparent fintech solutions.</p>
+                </div>
+                <div class="expertise-item">
+                    <span>Education</span>
+                    <p>Connecting learners and educators through smart platforms.</p>
+                </div>
+                <div class="expertise-item">
+                    <span>Retail</span>
+                    <p>Optimizing customer journeys and supply chains.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="cta-section">
+            <h2 class="premium-gradient">Ready to grow your business?</h2>
+            <p>Let's build something extraordinary together.</p>
+            <ion-button class="cta-button">
+                Contact Us
+                <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+            </ion-button>
+        </section>
+    </div>
+</ion-content>
