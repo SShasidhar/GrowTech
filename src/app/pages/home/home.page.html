@@ -6,12 +6,12 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button routerLink="/home" class="active-link">Home</ion-button>
-      <ion-button routerLink="/about">About</ion-button>
+      <ion-button routerLink="/home" class="active-link desktop-only">Home</ion-button>
+      <ion-button routerLink="/about" class="desktop-only">About</ion-button>
 
       <!-- Admin Dashboard Link (hidden if not admin) -->
       @if (isAdmin) {
-      <ion-button color="primary" routerLink="/dashboard">
+      <ion-button color="primary" routerLink="/dashboard" class="desktop-only">
         <ion-icon slot="start" name="apps-outline"></ion-icon>
         Dashboard
       </ion-button>
@@ -19,17 +19,24 @@
 
       <!-- Login / Logout buttons -->
       @if (!user) {
-      <ion-button (click)="login()" color="medium">
+      <ion-button (click)="login()" color="medium" class="desktop-only">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
         Login
       </ion-button>
       } @else {
-      <ion-button (click)="logout()" color="medium">
+      <ion-button (click)="logout()" color="medium" class="desktop-only">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
         Logout
       </ion-button>
       }
 
-      <ion-button (click)="toggleTheme()" class="theme-toggle">
+      <ion-button (click)="toggleTheme()" class="theme-toggle desktop-only">
         <ion-icon [name]="isDarkMode ? 'sunny-outline' : 'moon-outline'"></ion-icon>
+      </ion-button>
+
+      <!-- Mobile Menu Button -->
+      <ion-button (click)="openMobileMenu($event)" class="mobile-only">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

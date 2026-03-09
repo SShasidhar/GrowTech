@@ -146,5 +146,30 @@ ion-toolbar {
             --color: var(--gt-primary);
             margin-left: 12px;
         }
+
+        &.mobile-only {
+            --color: var(--gt-primary, #0066ff) !important;
+            --padding-start: 12px;
+            --padding-end: 12px;
+            width: auto;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+    }
+}
+
+.mobile-only {
+    display: none !important;
+}
+
+@media (max-width: 500px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: flex !important; // Force flex to prevent shadow dom collapsing
+        align-items: center;
+        justify-content: center;
     }
 }

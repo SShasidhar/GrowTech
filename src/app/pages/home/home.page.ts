@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, ModalController } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, ModalController, PopoverController } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { ContactModalComponent } from 'src/app/components/contact-modal/contact-modal.component';
 import { LoginModalComponent } from 'src/app/components/login-modal/login-modal.component';
+import { MobileMenuComponent } from 'src/app/components/mobile-menu/mobile-menu.component';
 import { AppConfig } from '../../config/appConfig';
 import { AngularService } from 'src/app/services/angular.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -31,6 +32,7 @@ export class HomePage implements OnInit, OnDestroy {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private modalCtrl: ModalController,
+    private popoverCtrl: PopoverController,
     private angularService: AngularService,
     private authService: AuthService
   ) {
@@ -101,5 +103,14 @@ export class HomePage implements OnInit, OnDestroy {
       // Data was successfully submitted, the modal component handles success message
       console.log('Contact inquiry submitted successfully');
     }
+  }
+
+  async openMobileMenu(event: any) {
+    const popover = await this.popoverCtrl.create({
+      component: MobileMenuComponent,
+      event: event,
+      translucent: true
+    });
+    await popover.present();
   }
 }

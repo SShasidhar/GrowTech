@@ -1,42 +1,54 @@
 import { addIcons } from 'ionicons';
 import {
-    arrowForwardOutline,
+    menuOutline,
+    sunnyOutline,
+    moonOutline,
+    logoGoogle,
+    logOutOutline,
+    appsOutline,
     rocketOutline,
     heartOutline,
     trophyOutline,
-    sunnyOutline,
-    moonOutline,
+    arrowForwardOutline,
+    homeOutline,
+    informationCircleOutline,
+    checkmarkCircleOutline,
     mailOutline,
     callOutline,
     locationOutline,
-    checkmarkCircleOutline,
-    statsChartOutline,
-    peopleOutline,
-    codeWorkingOutline,
+    closeOutline,
+    personCircleOutline,
+    trashOutline,
+    mailOpenOutline,
     shieldCheckmarkOutline,
-    paperPlaneOutline,
-    checkmarkCircle,
-    closeOutline
+    warningOutline,
+    calendarOutline
 } from 'ionicons/icons';
 
-export function registerIcons() {
+export const registerIcons = () => {
     addIcons({
-        arrowForwardOutline,
+        menuOutline,
+        sunnyOutline,
+        moonOutline,
+        logoGoogle,
+        logOutOutline,
+        appsOutline,
         rocketOutline,
         heartOutline,
         trophyOutline,
-        sunnyOutline,
-        moonOutline,
+        arrowForwardOutline,
+        homeOutline,
+        informationCircleOutline,
+        checkmarkCircleOutline,
         mailOutline,
         callOutline,
         locationOutline,
-        checkmarkCircleOutline,
-        statsChartOutline,
-        peopleOutline,
-        codeWorkingOutline,
+        closeOutline,
+        personCircleOutline,
+        trashOutline,
+        mailOpenOutline,
         shieldCheckmarkOutline,
-        paperPlaneOutline,
-        checkmarkCircle,
-        closeOutline
+        warningOutline,
+        calendarOutline
     });
-}
+};

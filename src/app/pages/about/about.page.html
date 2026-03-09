@@ -6,10 +6,15 @@
             </ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
-            <ion-button routerLink="/home">Home</ion-button>
-            <ion-button routerLink="/about" class="active-link">About</ion-button>
-            <ion-button (click)="toggleTheme()" class="theme-toggle">
+            <ion-button routerLink="/home" class="desktop-only">Home</ion-button>
+            <ion-button routerLink="/about" class="active-link desktop-only">About</ion-button>
+            <ion-button (click)="toggleTheme()" class="theme-toggle desktop-only">
                 <ion-icon [name]="isDarkMode ? 'sunny-outline' : 'moon-outline'"></ion-icon>
+            </ion-button>
+
+            <!-- Mobile Menu Button -->
+            <ion-button (click)="openMobileMenu($event)" class="mobile-only">
+                <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
