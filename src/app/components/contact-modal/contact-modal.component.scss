@@ -1,0 +1,93 @@
+.modal-content-wrapper {
+    background: var(--gt-bg);
+    min-height: 100%;
+    padding-bottom: 40px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    --color: var(--gt-text-muted);
+    z-index: 10;
+
+    &:hover {
+        --color: var(--gt-text);
+    }
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 30px;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: var(--gt-text-muted);
+        font-size: 1.1rem;
+    }
+}
+
+.modal-form {
+    max-width: 500px;
+    margin: 0 auto;
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .gt-input {
+        width: 100%;
+        padding: 16px;
+        border-radius: 12px;
+        background: var(--gt-glass-bg);
+        border: 1px solid var(--gt-glass-border);
+        color: var(--gt-text);
+        font-family: inherit;
+        font-size: 1rem;
+        transition: var(--gt-transition);
+
+        &:focus {
+            outline: none;
+            border-color: var(--gt-primary);
+            box-shadow: 0 0 0 3px rgba(var(--gt-primary-rgb), 0.2);
+        }
+    }
+
+    textarea.gt-input {
+        resize: vertical;
+    }
+
+    .submit-btn {
+        width: 100%;
+        margin-top: 20px;
+        --border-radius: 12px;
+    }
+}
+
+.success-msg {
+    color: #2dd36f;
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+
+    ion-icon {
+        font-size: 1.5rem;
+    }
+}
+
+.premium-gradient {
+    background: linear-gradient(135deg, var(--gt-primary), var(--gt-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

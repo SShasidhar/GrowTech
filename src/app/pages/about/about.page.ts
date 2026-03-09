@@ -1,10 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { arrowForwardOutline, rocketOutline, heartOutline, trophyOutline, sunnyOutline, moonOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
+
+import { IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, ModalController } from '@ionic/angular/standalone';
+import { arrowForwardOutline, rocketOutline, heartOutline, trophyOutline, sunnyOutline, moonOutline, mailOutline, callOutline, locationOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+
+import { ContactModalComponent } from 'src/app/components/contact-modal/contact-modal.component';
 
 @Component({
     selector: 'app-about',
@@ -19,10 +22,11 @@ import { RouterModule } from '@angular/router';
 export class AboutPage implements OnInit {
     isDarkMode = true;
 
-    constructor(@Inject(DOCUMENT) private document: Document) {
+    constructor(@Inject(DOCUMENT) private document: Document,
+        private modalCtrl: ModalController) {
         addIcons({
             arrowForwardOutline, rocketOutline, heartOutline, trophyOutline,
-            sunnyOutline, moonOutline
+            sunnyOutline, moonOutline, mailOutline, callOutline, locationOutline
         });
     }
 
@@ -36,6 +40,20 @@ export class AboutPage implements OnInit {
             this.document.body.classList.remove('body-light');
         } else {
             this.document.body.classList.add('body-light');
+        }
+    }
+
+    async openContactModal() {
+        const modal = await this.modalCtrl.create({
+            component: ContactModalComponent,
+            breakpoints: [0, 1],
+            initialBreakpoint: 1
+        });
+        await modal.present();
+        const { data } = await modal.onWillDismiss();
+        if (data && data.submitted) {
+            // Data was successfully submitted, the modal component handles success message
+            console.log('Contact inquiry submitted successfully');
         }
     }
 }

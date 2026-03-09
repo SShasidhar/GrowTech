@@ -33,6 +33,11 @@
           Discover Our Impact
           <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
         </ion-button>
+        <ion-button fill="outline" class="cta-button alternate-btn" (click)="openContactModal()"
+          style="margin-left: 15px;">
+          Contact Us
+          <ion-icon slot="end" name="mail-outline"></ion-icon>
+        </ion-button>
       </div>
     </div>
   </section>
@@ -66,4 +71,23 @@
       </div>
     </div>
   </section>
+
+  <!-- Footer Section -->
+  <footer class="main-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h3 class="grow-tech-title"><span class="premium-gradient">GrowTech</span></h3>
+        <p>Premium digital excellence, engineered for strategic growth at an accessible scale.</p>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p><ion-icon name="mail-outline"></ion-icon> {{ contactEmail }}</p>
+        <p><ion-icon name="call-outline"></ion-icon> {{ contactPhone }}</p>
+        <p><ion-icon name="location-outline"></ion-icon> India</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 GrowTech. All rights reserved.</p>
+    </div>
+  </footer>
 </ion-content>
