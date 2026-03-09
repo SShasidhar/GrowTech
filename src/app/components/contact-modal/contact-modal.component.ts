@@ -43,7 +43,6 @@ export class ContactModalComponent implements OnInit {
 
             // Show alert from angular.service (as requested)
             this.angularService.showAlert({
-                header: 'Validation Error',
                 message: errorMessage
             });
             return;

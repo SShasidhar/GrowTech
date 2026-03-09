@@ -54,4 +54,4 @@ After the initial setup, your regular update flow will be:
 **GrowTech** | Strategic Web & Mobile Solutions
 
 
-**Website Link** | https://growtech-business.web.app/about
+**Website Link** | https://growtech-business.web.app

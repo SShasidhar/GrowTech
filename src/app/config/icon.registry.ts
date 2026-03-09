@@ -22,7 +22,8 @@ import {
     mailOpenOutline,
     shieldCheckmarkOutline,
     warningOutline,
-    calendarOutline
+    calendarOutline,
+    paperPlaneOutline
 } from 'ionicons/icons';
 
 export const registerIcons = () => {
@@ -49,6 +50,7 @@ export const registerIcons = () => {
         mailOpenOutline,
         shieldCheckmarkOutline,
         warningOutline,
-        calendarOutline
+        calendarOutline,
+        paperPlaneOutline
     });
 };
