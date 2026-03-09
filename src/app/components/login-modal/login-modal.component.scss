@@ -6,7 +6,8 @@
     justify-content: center;
     padding: 40px 20px;
     background: var(--ion-background-color);
-    min-height: 350px;
+    height: 100%;
+    overflow: auto;
 }
 
 .close-btn {

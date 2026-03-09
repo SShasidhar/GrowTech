@@ -1,45 +1,48 @@
-<div class="modal-content-wrapper ion-padding">
+<div class="outer-container">
     <ion-button [disabled]="isSubmitting" fill="clear" class="close-btn" (click)="dismiss()">
         <ion-icon name="close-outline" slot="icon-only"></ion-icon>
     </ion-button>
 
-    <div class="modal-header">
-        <h2 class="premium-gradient">Get In Touch</h2>
-        <p>We'll get back to you with a strategic plan for your business.</p>
+    <div class="modal-content-wrapper ion-padding">
+
+        <div class="modal-header">
+            <h2 class="premium-gradient">Get In Touch</h2>
+            <p>We'll get back to you with a strategic plan for your business.</p>
+        </div>
+
+        <form [formGroup]="contactForm" class="modal-form" (ngSubmit)="submitForm()">
+            <div class="form-group">
+                <input type="text" formControlName="name" placeholder="Your Name" class="gt-input"
+                    [class.invalid]="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
+                @if (contactForm.get('name')?.invalid && contactForm.get('name')?.touched) {
+                <div class="error-text">
+                    Name is required
+                </div>
+                }
+            </div>
+            <div class="form-group">
+                <input type="email" formControlName="email" placeholder="Email Address" class="gt-input"
+                    [class.invalid]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+                @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+                <div class="error-text">
+                    @if (contactForm.get('email')?.hasError('required')) {
+                    <span>Email is required</span>
+                    }
+                    @if (contactForm.get('email')?.hasError('email')) {
+                    <span>Please enter a valid email</span>
+                    }
+                </div>
+                }
+            </div>
+            <div class="form-group">
+                <textarea formControlName="message" placeholder="Tell us about your project" rows="4"
+                    class="gt-input"></textarea>
+            </div>
+
+            <ion-button type="submit" [disabled]="isSubmitting" class="cta-button submit-btn">
+                {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+                <ion-icon slot="end" name="paper-plane-outline"></ion-icon>
+            </ion-button>
+        </form>
     </div>
-
-    <form [formGroup]="contactForm" class="modal-form" (ngSubmit)="submitForm()">
-        <div class="form-group">
-            <input type="text" formControlName="name" placeholder="Your Name" class="gt-input"
-                [class.invalid]="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
-            @if (contactForm.get('name')?.invalid && contactForm.get('name')?.touched) {
-            <div class="error-text">
-                Name is required
-            </div>
-            }
-        </div>
-        <div class="form-group">
-            <input type="email" formControlName="email" placeholder="Email Address" class="gt-input"
-                [class.invalid]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
-            @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
-            <div class="error-text">
-                @if (contactForm.get('email')?.hasError('required')) {
-                <span>Email is required</span>
-                }
-                @if (contactForm.get('email')?.hasError('email')) {
-                <span>Please enter a valid email</span>
-                }
-            </div>
-            }
-        </div>
-        <div class="form-group">
-            <textarea formControlName="message" placeholder="Tell us about your project" rows="4"
-                class="gt-input"></textarea>
-        </div>
-
-        <ion-button type="submit" [disabled]="isSubmitting" class="cta-button submit-btn">
-            {{ isSubmitting ? 'Sending...' : 'Send Message' }}
-            <ion-icon slot="end" name="paper-plane-outline"></ion-icon>
-        </ion-button>
-    </form>
 </div>

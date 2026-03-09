@@ -24,9 +24,10 @@
 
 .mission-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 32px;
     margin-bottom: 120px;
+    overflow: auto;
 }
 
 .mission-card {
@@ -171,5 +172,24 @@ ion-toolbar {
         display: flex !important; // Force flex to prevent shadow dom collapsing
         align-items: center;
         justify-content: center;
+    }
+}
+
+@media (max-width: 500px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: flex !important; // Force flex to prevent shadow dom collapsing
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 350px) {
+    .mission-section {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
     }
 }
