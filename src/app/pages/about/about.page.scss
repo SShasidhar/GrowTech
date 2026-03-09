@@ -190,6 +190,12 @@ ion-toolbar {
 
 @media (max-width: 350px) {
     .mission-section {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    }
+}
+
+@media (max-width: 250px) {
+    .mission-section {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
     }
 }
