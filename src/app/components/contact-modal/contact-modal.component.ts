@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { IonButton, IonIcon, ModalController } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { paperPlaneOutline, checkmarkCircle, closeOutline } from 'ionicons/icons';
+
 import { DatabaseService } from 'src/app/services/database.service';
 import { AngularService } from 'src/app/services/angular.service';
 
@@ -12,33 +11,40 @@ import { AngularService } from 'src/app/services/angular.service';
     templateUrl: './contact-modal.component.html',
     styleUrls: ['./contact-modal.component.scss'],
     standalone: true,
-    imports: [CommonModule, FormsModule, IonButton, IonIcon]
+    imports: [ReactiveFormsModule, IonButton, IonIcon]
 })
 export class ContactModalComponent implements OnInit {
 
-    contactData = {
-        name: '',
-        email: '',
-        message: ''
-    };
-
+    contactForm: FormGroup;
     isSubmitting = false;
 
     constructor(
         private modalCtrl: ModalController,
         private db: DatabaseService,
-        private angularService: AngularService
+        private angularService: AngularService,
+        private fb: FormBuilder
     ) {
-        addIcons({ paperPlaneOutline, checkmarkCircle, closeOutline });
+        this.contactForm = this.fb.group({
+            name: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            message: ['']
+        });
     }
 
     ngOnInit() { }
 
     async submitForm() {
-        if (!this.contactData.name || !this.contactData.email) {
+        if (this.contactForm.invalid) {
+            this.contactForm.markAllAsTouched();
+            let errorMessage = 'Please fill in all required fields.';
+            if (this.contactForm.get('email')?.hasError('email')) {
+                errorMessage = 'Please enter a valid email address.';
+            }
+
+            // Show alert from angular.service (as requested)
             this.angularService.showAlert({
                 header: 'Validation Error',
-                message: 'Please fill in your name and email.'
+                message: errorMessage
             });
             return;
         }
@@ -46,10 +52,16 @@ export class ContactModalComponent implements OnInit {
         this.isSubmitting = true;
 
         try {
-            await this.db.sendInquiry(this.contactData);
-
+            // Check if sendInquiry resolved correctly, add timeout to prevent infinite hangs
+            // since Firebase can hang indefinitely if the config is invalid (e.g. "YOUR_API_KEY")
+            const response = await Promise.race([
+                this.db.sendInquiry(this.contactForm.value),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('Request timed out.')), 30000))
+            ]);
+            console.log(" Testing :: submitForm :: response = ", response);
             this.isSubmitting = false;
 
+            // Show success alert from angular.service
             await this.angularService.showAlert({
                 header: 'Success',
                 message: 'Message sent successfully! We will contact you soon.'
@@ -58,9 +70,10 @@ export class ContactModalComponent implements OnInit {
 
         } catch (e: any) {
             console.error(e);
+            // Show error alert from angular.service
             this.angularService.showAlert({
                 header: 'Error',
-                message: 'Error sending message. ' + e.message
+                message: 'Failed to send message. Please try again later.'
             });
             this.isSubmitting = false;
         }

@@ -1,4 +1,5 @@
 window.AppConfig = {
-    contactEmail: "hello@growtech.com",
-    contactPhone: "+91 98765 43210"
+    theme: 'light',
+    contactEmail: "shasidhardevlops@gmail.com",
+    contactPhone: "+91 6302537682"
 };

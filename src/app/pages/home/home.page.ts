@@ -1,12 +1,14 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, ModalController } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { arrowForwardOutline, checkmarkCircleOutline, statsChartOutline, peopleOutline, codeWorkingOutline, shieldCheckmarkOutline, sunnyOutline, moonOutline, mailOutline, callOutline, locationOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
 import { ContactModalComponent } from 'src/app/components/contact-modal/contact-modal.component';
+import { LoginModalComponent } from 'src/app/components/login-modal/login-modal.component';
 import { AppConfig } from '../../config/appConfig';
+import { AngularService } from 'src/app/services/angular.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
+import { User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -14,28 +16,67 @@ import { AppConfig } from '../../config/appConfig';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
-    IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, CommonModule, FormsModule, RouterModule
+    IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, RouterModule
   ]
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   isDarkMode = true;
   contactEmail = AppConfig.contactEmail;
   contactPhone = AppConfig.contactPhone;
 
+  user: User | null = null;
+  isAdmin = false;
+  private authSub: Subscription | null = null;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private angularService: AngularService,
+    private authService: AuthService
   ) {
-    addIcons({
-      arrowForwardOutline, checkmarkCircleOutline, statsChartOutline,
-      peopleOutline, codeWorkingOutline, shieldCheckmarkOutline,
-      sunnyOutline, moonOutline, mailOutline, callOutline, locationOutline
-    });
   }
 
   ngOnInit() {
     // Initial theme check
-    this.isDarkMode = !this.document.body.classList.contains('body-light');
+    this.isDarkMode = AppConfig.theme === 'dark';
+    if (this.isDarkMode) {
+      this.document.body.classList.remove('body-light');
+    } else {
+      this.document.body.classList.add('body-light');
+    }
+    // Listen to login state
+    this.authSub = this.authService.user$.subscribe(currentUser => {
+      this.user = currentUser;
+      if (currentUser && currentUser.email === AppConfig.contactEmail) {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.authSub) {
+      this.authSub.unsubscribe();
+    }
+  }
+
+  async login() {
+    const modal = await this.modalCtrl.create({
+      component: LoginModalComponent,
+      backdropDismiss: true
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data && data.loggedIn) {
+      console.log('User logged in securely');
+    }
+  }
+
+  async logout() {
+    await this.authService.logout();
   }
 
   toggleTheme() {
@@ -50,8 +91,7 @@ export class HomePage implements OnInit {
   async openContactModal() {
     const modal = await this.modalCtrl.create({
       component: ContactModalComponent,
-      breakpoints: [0, 1],
-      initialBreakpoint: 1
+      backdropDismiss: false
     });
 
     await modal.present();

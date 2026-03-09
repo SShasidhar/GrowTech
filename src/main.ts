@@ -9,6 +9,12 @@ import { environment } from './environments/environment';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { provideHttpClient } from '@angular/common/http';
+import { registerIcons } from './app/config/icon.registry';
+
+import { provideAuth, getAuth } from '@angular/fire/auth';
+
+// Register all required Ionicons globally
+registerIcons();
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -17,6 +23,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
     provideHttpClient()
   ],
 });

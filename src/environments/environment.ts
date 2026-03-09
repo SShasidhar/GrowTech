@@ -6,15 +6,16 @@ declare var window: any;
 
 export const environment = {
   production: false,
+  theme: window.AppConfig?.theme,
   contactEmail: window.AppConfig?.contactEmail,
   contactPhone: window.AppConfig?.contactPhone,
   firebaseConfig: {
-    apiKey: "YOUR_API_KEY",
+    apiKey: "AIzaSyDnbQaqh3lYquW9k8684jbUv1MZW-fkmmM",
     authDomain: "growtech-business.firebaseapp.com",
     projectId: "growtech-business",
     storageBucket: "growtech-business.firebasestorage.app",
-    messagingSenderId: "YOUR_ID",
-    appId: "YOUR_APP_ID"
+    messagingSenderId: "981234586923",
+    appId: "1:981234586923:web:01b05ab8b676a35927216e"
   }
 };
 

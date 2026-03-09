@@ -1,11 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, ModalController } from '@ionic/angular/standalone';
-import { arrowForwardOutline, rocketOutline, heartOutline, trophyOutline, sunnyOutline, moonOutline, mailOutline, callOutline, locationOutline } from 'ionicons/icons';
-import { addIcons } from 'ionicons';
 
 import { ContactModalComponent } from 'src/app/components/contact-modal/contact-modal.component';
 
@@ -16,7 +13,7 @@ import { ContactModalComponent } from 'src/app/components/contact-modal/contact-
     standalone: true,
     imports: [
         IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon,
-        CommonModule, FormsModule, RouterModule
+        RouterModule
     ]
 })
 export class AboutPage implements OnInit {
@@ -24,10 +21,6 @@ export class AboutPage implements OnInit {
 
     constructor(@Inject(DOCUMENT) private document: Document,
         private modalCtrl: ModalController) {
-        addIcons({
-            arrowForwardOutline, rocketOutline, heartOutline, trophyOutline,
-            sunnyOutline, moonOutline, mailOutline, callOutline, locationOutline
-        });
     }
 
     ngOnInit() {
@@ -47,7 +40,8 @@ export class AboutPage implements OnInit {
         const modal = await this.modalCtrl.create({
             component: ContactModalComponent,
             breakpoints: [0, 1],
-            initialBreakpoint: 1
+            initialBreakpoint: 1,
+            backdropDismiss: false
         });
         await modal.present();
         const { data } = await modal.onWillDismiss();

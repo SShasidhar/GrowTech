@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, query, orderBy } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, query, orderBy, doc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 /**
@@ -40,4 +40,14 @@ export class DatabaseService {
         // collectionData automatically updates your app whenever the DB changes
         return collectionData(q, { idField: 'id' });
     }
+
+    /**
+     * DELETE: Deletes an inquiry from the database permanently.
+     * Only works if the user is authenticated and is the admin (handled by Firestore Rules).
+     */
+    async deleteInquiry(id: string) {
+        const inquiryDocRef = doc(this.firestore, `inquiries/${id}`);
+        return deleteDoc(inquiryDocRef);
+    }
+
 }

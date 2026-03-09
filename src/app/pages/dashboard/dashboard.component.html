@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Admin Dashboard</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <!-- STATE 1: Not Logged In -->
+    <div *ngIf="!user" class="center-content">
+        <ion-icon name="shield-checkmark-outline" class="large-icon"></ion-icon>
+        <h2>Admin Access Required</h2>
+        <p>Please use the Admin Login button in the header to view inquiries.</p>
+    </div>
+
+    <!-- STATE 2: Logged In, but NOT Admin -->
+    <div *ngIf="user && !isAdmin" class="center-content error-state">
+        <ion-icon name="warning-outline" color="danger" class="large-icon"></ion-icon>
+        <h2 color="danger">Access Denied</h2>
+        <p>The account <strong>{{ user.email }}</strong> is not authorized to view this dashboard.</p>
+    </div>
+
+    <!-- STATE 3: Admin Logged In! -->
+    <div *ngIf="user && isAdmin">
+        <div class="header-banner">
+            <h2>Welcome, Admin</h2>
+            <p>Managing {{ inquiries.length }} total inquiries.</p>
+        </div>
+
+        <!-- Tabular Inquiry List -->
+        <div class="table-container ion-margin-top">
+            <table class="inquiry-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let inquiry of inquiries">
+                        <td class="date-col">{{ inquiry.createdAt?.toDate() | date:'short' }}</td>
+                        <td class="name-col"><strong>{{ inquiry.name }}</strong></td>
+                        <td class="email-col">
+                            <a href="mailto:{{ inquiry.email }}">{{ inquiry.email }}</a>
+                        </td>
+                        <td class="msg-col">
+                            <div class="message-text">{{ inquiry.message || 'No message provided.' }}</div>
+                        </td>
+                        <td class="action-col text-center">
+                            <ion-button color="danger" fill="clear" size="small" (click)="deleteInquiry(inquiry.id)">
+                                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                            </ion-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div *ngIf="inquiries.length === 0" class="center-content">
+            <ion-icon name="mail-open-outline" class="large-icon"></ion-icon>
+            <h3>No Inquiries Found</h3>
+            <p>Your inbox is clean!</p>
+        </div>
+    </div>
+
+</ion-content>

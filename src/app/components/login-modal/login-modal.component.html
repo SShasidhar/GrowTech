@@ -1,0 +1,19 @@
+<div class="modal-content-wrapper ion-padding text-center">
+    <ion-button fill="clear" class="close-btn" (click)="dismiss()">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+
+    <div class="modal-header">
+        <ion-icon name="person-circle-outline" class="large-icon"></ion-icon>
+        <h2 class="premium-gradient">Welcome Back</h2>
+        <p>Log in securely.</p>
+    </div>
+
+    <div class="modal-form">
+        <ion-button (click)="loginWithGoogle()" expand="block" [disabled]="isSubmitting" color="primary"
+            class="ion-margin-top google-btn">
+            <ion-icon slot="start" name="logo-google"></ion-icon>
+            {{ isSubmitting ? 'Signing in...' : 'Sign in with Google' }}
+        </ion-button>
+    </div>
+</div>
