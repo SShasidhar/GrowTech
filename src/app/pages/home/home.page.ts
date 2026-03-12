@@ -93,6 +93,8 @@ export class HomePage implements OnInit, OnDestroy {
   async openContactModal() {
     const modal = await this.modalCtrl.create({
       component: ContactModalComponent,
+      breakpoints: [0, 1],
+      initialBreakpoint: 1,
       backdropDismiss: false
     });
 
